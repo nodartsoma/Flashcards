@@ -11,7 +11,7 @@ from users.serializers import UserSerializer, UserLoginSerializer
 
 @api_view(['Post'])
 def register(request):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
     serializer = UserSerializer(data=request.data)
@@ -24,7 +24,7 @@ def register(request):
 
 class Login(APIView):
     def post(self, request):
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             return Response(status=status.HTTP_400_BAD_REQUEST)
         serializer = UserLoginSerializer(data=request.data)
 
@@ -37,7 +37,7 @@ class Login(APIView):
         user = authenticate(username=username, password=password)
 
         if user is None:
-            return Response(data={"error":"Invalid username or password"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(data={"error": "Invalid username or password"}, status=status.HTTP_400_BAD_REQUEST)
 
         login(request, user)
         return Response(status=status.HTTP_200_OK)
