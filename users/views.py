@@ -1,13 +1,11 @@
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import render, redirect
-from django.contrib import messages
+
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .forms import UserRegisterForm
 from users.serializers import UserSerializer, UserLoginSerializer
 
 
@@ -23,20 +21,6 @@ def register(request):
         return Response(status=status.HTTP_201_CREATED)
 
     return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    # if request.user.is_authenticated:
-    #     return redirect('home')
-    #
-    # # if request.method == 'POST':
-    # #     form = UserRegisterForm(request.POST)
-    #     if form.is_valid():
-    #         form.save()
-    #         username = form.cleaned_data.get('username')
-    #         messages.success(request, f'Account created for {username}! You are able to login!')
-    #         return redirect('login')
-    # else:
-    #     form = UserRegisterForm()
-    # return render(request, 'users/register.html', {'form': form})
 
 class Login(APIView):
     def post(self, request):

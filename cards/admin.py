@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import FlashCard
+from .models import Flashcard
 
 
 # Register your models here.
-admin.site.register(FlashCard)
+admin.site.register(Flashcard)
 
